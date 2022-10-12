@@ -1,0 +1,205 @@
+{% extends "layout.html" %} {% block content %}
+<div>
+ 
+  <div class="row">
+    <form
+      action="/generatemaster"
+      id="synthetic-form"
+      method="POST"
+      enctype="text/plain"
+    >
+  
+      <div class="form-check form-check-inline" id="generate">
+        <label>
+          <input name="data_generator" id="gen"  value="New Data Generation" type="radio" checked />
+          <span>New Data Generation</span>
+        </label>
+      </div>
+      <div class="form-check form-check-inline" id="extract" >
+        <label>
+          <input name="data_generator" id="ext" value="Download Data Extract" type="radio" />
+          <span>Download Data Extract</span>
+        </label>
+      </div>
+      <h6>Field Parameters</h6>
+      <div class="row align-items-center g-1 fields">
+        <div class="col-auto">
+          <label class="visually-hidden" for="curve_key"
+            >Order Curve Key</label
+          >
+        </div>
+        <div class="col-auto">
+        <select name="curve_key" id="curve_key">
+          <option value="C1">C1</option>
+          <option value="C2">C2</option>
+          <option value="C3">C3</option>
+        </select>
+      </div>
+      </div>
+      <div class="row align-items-center g-1">
+        <div class="col-auto">
+          <label class="visually-hidden" for="unique_key"
+            >Unique Key Identifier</label
+          >
+        </div>
+        <div class="col-auto">
+          <input
+            type="text"
+            class="form-control"
+            name="unique_key"
+            id="unique_key"
+            placeholder="Unique Key Identifier"
+            required
+          />
+        </div>
+      </div>
+      <div class="row align-items-center g-1 fields">
+        <div class="col-auto">
+          <label class="visually-hidden" for="customer"
+            >Number of customers</label
+          >
+        </div>
+        <div class="col-auto">
+          <input
+            type="Number"
+            class="form-control"
+            name="customer"
+            id="customer"
+            placeholder="Customers"
+            
+          />
+        </div>
+      </div>
+      <div class="row align-items-center g-1 fields">
+        <div class="col-auto">
+          <label class="visually-hidden" for="order">Number of orders</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="Number"
+            class="form-control"
+            name="order"
+            id="order"
+            placeholder="Orders"
+            
+          />
+        </div>
+      </div>
+      <div class="row align-items-center g-1 fields">
+        <div class="col-auto">
+          <label class="visually-hidden" for="transaction"
+            >Number of transactions</label
+          >
+        </div>
+        <div class="col-auto">
+          <input
+            type="Number"
+            class="form-control"
+            name="transaction"
+            id="transaction"
+            placeholder="Transactions"
+            
+          />
+        </div>
+      </div>
+      <div class="row align-items-center g-1 fields">
+        <div class="col-auto">
+          <label class="visually-hidden" for="fulfillment"
+            >Number of fulfillments</label
+          >
+        </div>
+        <div class="col-auto">
+          <input
+            type="Number"
+            class="form-control"
+            name="fulfillment"
+            id="fulfillment"
+            placeholder="Fulfillments"
+            
+          />
+        </div>
+      </div>
+      <div class="col-12">
+        <h6>Store Parameters</h6>
+        <div class="form-check form-check-inline mt-3">
+          <label>
+            <input type="checkbox" value="Shopify" name="store" />
+            <span>Shopify</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="Magento" name="store" />
+            <span>Magento</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="WooCommerce" name="store" />
+            <span>Woo Commerce</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="BigCommerce" name="store" />
+            <span>Big Commerce</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <h6>Output Parameters</h6>
+        <div class="form-check form-check-inline mt-3">
+          <label>
+            <input type="checkbox" value="customer" name="output" />
+            <span>Customer</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="order" name="output" />
+            <span>Order</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="transaction" name="output" />
+            <span>Transaction</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label>
+            <input type="checkbox" value="fulfillment" name="output" />
+            <span>Fulfillment</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline" id="product">
+          <label>
+            <input type="checkbox" value="product" name="output" />
+            <span>Product</span>
+          </label>
+        </div>
+      </div>
+      <div class="col s12 mt-5">
+        <span class="flow-text">
+          <button class="btn waves-effect waves-light" id="generate-button" type="submit" name="action">Generate Master Data
+            <i class="material-icons right">cached</i>
+          </button>
+          <button class="btn waves-effect waves-light" id="download-button"  type="submit" name="action">Download csv
+            <i class="material-icons right">cloud_download</i>
+          </button>
+        
+      </div>
+    </form>
+  </div>
+</div>
+  {% if error %}
+<script>
+
+  var error = {{ error }};
+  console.log(error)
+  show_error(error)
+
+</script>
+{% endif %}
+{% endblock content %}
